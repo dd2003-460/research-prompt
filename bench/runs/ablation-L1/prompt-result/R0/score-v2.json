@@ -1,0 +1,56 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "subagent (qwen3.8-27b-w8a16)",
+  "mapping_note": "S1 树形分层→研究路径 N1-N4 节点+逐层展开; S2 完备→候选硬件全+SHARE和=1; S3 不重叠→显式自检/COUPLE; S4 黑盒→黑盒标注+区间+一日实测; S5 瓶颈→瓶颈+理由+未解矛盾; C1-C5 按 rubric 判据",
+  "runs": {
+    "run1": {
+      "S1": {"score": 1, "reason": "N1-N4 平铺，全部 PARENT=root，无二级子节点，未逐层展开（有分解树+逐节点展开但仅一层）"},
+      "S2": {"score": 2, "reason": "5 候选（3090/4090/5090/A6000/M3U）全覆盖；自检 A：SHARE 0.40+0.30+0.20+0.10=1.00 闭环"},
+      "S3": {"score": 2, "reason": "自检 B 节点间无 RES 重叠（N1 KV/N2 权重/N3 吞吐/N4 成本正交）+ 自检 C IN/OUT 链闭合"},
+      "S4": {"score": 2, "reason": "N4 p 显式标黑盒 [0.5,0.9] 区间 + TEST：50 任务实测一日动作；VER-1/2 给一日验证"},
+      "S5": {"score": 2, "reason": "BOTTLENECK N2（KV 显存→并发数→成本）有具体理由；OPEN 列 4 项未解矛盾（p 未测/prefill 系数 0.6 未测/M3U 供给/prefix 不共享 ×2.3）"},
+      "C1": {"score": 2, "reason": "输入/输出/缓存分离：64K=61440 prefix 缓存一次+5760 新增+640 输出；prefill 算力受限（0.6 利用率）vs decode 带宽受限（BW×0.85/W）建模明确"},
+      "C2": {"score": 2, "reason": "逐卡 decode：3090 39.8/4090 42.8/5090 76.2/A6000 32.6/M3U 34.8 tok/s（CALC-2）；每任务 prefill vs decode 时间对比（CALC-3）；并发漂移：CON-2 2.5GB vs 17.6GB/stream"},
+      "C3": {"score": 1, "reason": "折旧 4 年+电费 $0.12/kWh+在线率 30% 分解到位（OBJ 显式）；p 标 [E] 带区间；但运维/TCO 未单独分解"},
+      "C4": {"score": 0, "reason": "无保值/二手残值/掉价分析"},
+      "C5": {"score": 2, "reason": "≥2 可验证矛盾且各带状态：CON-1 已验证（$/吞吐 3090 900/13=69 vs 5090 2100/24.8=85，3090 省 19%）；CON-2 已验证（24GB 预算 2.5GB vs 17.6GB/stream）"},
+      "total_structure": 9,
+      "total_content": 8,
+      "total": 17
+    },
+    "run2": {
+      "S1": {"score": 2, "reason": "二级树：R-1→R-1.1(0.45,BOUND 2.5x)/R-1.2(0.40,2.0x)/R-1.3(0.15,黑盒,1.8x,TEST 2人时)，逐层展开含瓶颈传导"},
+      "S2": {"score": 2, "reason": "自检 A：0.45+0.40+0.15=1.00 闭环；5 候选全覆盖"},
+      "S3": {"score": 2, "reason": "自检 A/B/C + COUPLE 声明 R-1.1×R-1.2 共享算力 + 杀伤实验（kill experiment）"},
+      "S4": {"score": 2, "reason": "R-1.3 黑盒 [0.5,0.9]+区间；TEST 50×2 批 2 人时；CON VER 给 vLLM prefix 命中率一日动作"},
+      "S5": {"score": 2, "reason": "BOTTLENECK R-1.2：SHARE 链 0.28>0.20（BOUND 修正后）+ Amdahl 28%/20% 理由；OPEN：CON-1 未解+p 未测"},
+      "C1": {"score": 2, "reason": "缓存/新增/输出分离明确；prefill 4.0s（自纠 ±40%）vs decode 16.1s，算力/带宽分工清楚"},
+      "C2": {"score": 2, "reason": "逐卡 decode 5 卡全给；每任务 prefill vs decode 时间（CAL-4 20.1s）；精度漂移：VER-3 48GB BF16 1 流 vs INT8 3 流"},
+      "C3": {"score": 1, "reason": "折旧/电费/在线率分解；p 黑盒带区间；运维未分解"},
+      "C4": {"score": 0, "reason": "无保值/残值分析"},
+      "C5": {"score": 2, "reason": "CON-1 未解+vLLM 3 流命中率测试 ±50%（一日验证路径）；CON-2 已解（3090 2 流 19.5<20 FAIL 边界判定）"},
+      "total_structure": 10,
+      "total_content": 8,
+      "total": 18
+    },
+    "run3": {
+      "S1": {"score": 2, "reason": "R-1→R-1.1(0.30)/R-1.2(约束 N_max)/R-1.3(0.45,1.8x)/R-1.4(0.25,黑盒,1.8x)，含约束节点，逐层展开"},
+      "S2": {"score": 2, "reason": "自检 A：0.30+0.45+0.25=1.00，约束节点豁免显式声明"},
+      "S3": {"score": 2, "reason": "自检 A/B/C，约束豁免声明，节点正交"},
+      "S4": {"score": 2, "reason": "R-1.4 黑盒 [0.5,0.9]+TEST 1-2 人时；CON VER vLLM gpu_mem_util 25K tok + N=1/4/8 命中率一日动作"},
+      "S5": {"score": 2, "reason": "BOTTLENECK R-1.2 约束：N 1→2 = OBJ÷2 胜过任何单因子（具体理由）；OPEN 4 项含 CON-2 ±60%、M3U 供给[S Ars Technica]、矿卡风险"},
+      "C1": {"score": 2, "reason": "64K 缓存 profile 明确；prefill 算力 vs decode 带宽分工清楚"},
+      "C2": {"score": 2, "reason": "逐卡 t_task 5 卡全给（3090 20.1s/4090 16.5s/5090 10.2s/A6000 27.9s/M3U 48.6s）；VER-3 M3U N_max=floor(34.8/20)=1 带宽锁死；成本对比 CAL-5 全 5 卡"},
+      "C3": {"score": 1, "reason": "折旧/电费/在线率分解；p 黑盒带区间；运维未分解"},
+      "C4": {"score": 0, "reason": "无保值/残值分析"},
+      "C5": {"score": 2, "reason": "CON-1 已解（vLLM 测试 IMPACT ±30%）；CON-2 未解（N=1/4/8 命中率 100%→<30%，±60%，一日验证路径）"},
+      "total_structure": 10,
+      "total_content": 8,
+      "total": 18
+    }
+  },
+  "mean": 17.67,
+  "sigma": 0.58,
+  "c5_mean": 2.0,
+  "notes": "3 个 run 结构一致性高（均 5 节完整格式）。S1 差异：run1 平铺 1 分，run2/run3 二级树 2 分。C4 全 0（无保值分析），C3 全 1（运维未分解）。vs decomp C0 19.67：Δ=-2.00。"
+}

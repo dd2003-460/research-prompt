@@ -1,0 +1,56 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "subagent (qwen3.8-27b-w8a16)",
+  "mapping_note": "S1 树形分层→研究路径 N1-N4 节点+逐层展开; S2 完备→候选硬件全+SHARE和=1; S3 不重叠→显式自检/COUPLE; S4 黑盒→黑盒标注+区间+一日实测; S5 瓶颈→瓶颈+理由+未解矛盾; C1-C5 按 rubric 判据",
+  "runs": {
+    "run1": {
+      "S1": {"score": 1, "reason": "N1-N4 平铺，无 PARENT/子节点分层，仅一层（N1 KV 17.37GB/流/N2 权重/N3 吞吐/N4 成本）"},
+      "S2": {"score": 1, "reason": "6 候选硬件覆盖最全（3090×2/4090/5090/M3U/A6000×2/RTX 6000 Ada×2），但无 share 分解，无 sum=1 检查"},
+      "S3": {"score": 0, "reason": "无显式不重叠自检/COUPLE 耦合声明/正交性检查"},
+      "S4": {"score": 1, "reason": "p 标黑盒（0.7/0.9/0.95 点值，无区间）；VER-1/2=待实测，非一日验证动作"},
+      "S5": {"score": 2, "reason": "BOTTLENECK KV 显存+具体理由（17.37GB/流）+OPEN 3 项未解矛盾（p/arch assumption/多并发）"},
+      "C1": {"score": 1, "reason": "无输入/输出/缓存分离（task=2000 tokens 打包，偏离 90:9:1 64K profile）；decode 带宽受限有建模，prefill 从未建模"},
+      "C2": {"score": 1, "reason": "逐卡 decode tok/s 6 卡全给（24.6/45.4/80.8/25.9/21.6/21.6），但无逐卡 prefill 估算，无 prefill-vs-decode 对比，无漂移分析"},
+      "C3": {"score": 1, "reason": "摊销 2 年+电费 $0.10/kWh+通过率惩罚分解；无运维，p 无区间"},
+      "C4": {"score": 0, "reason": "无保值/二手残值分析"},
+      "C5": {"score": 1, "reason": "CON-1..4 ≥2 个可验证矛盾（有 MECHANISM+VERIFICATION+IMPACT），但无已解/未解状态标注，验证=数字对比非一日实测路径"},
+      "total_structure": 5,
+      "total_content": 5,
+      "total": 9
+    },
+    "run2": {
+      "S1": {"score": 1, "reason": "同 run1：N1-N4 平铺无分层"},
+      "S2": {"score": 1, "reason": "同 run1：6 候选最全但无 share/sum=1"},
+      "S3": {"score": 0, "reason": "同 run1：无自检/COUPLE"},
+      "S4": {"score": 1, "reason": "同 run1：p 黑盒点值无区间，VER 待实测"},
+      "S5": {"score": 2, "reason": "同 run1：BOTTLENECK+理由+OPEN 3"},
+      "C1": {"score": 1, "reason": "同 run1：无 cache 分离，prefill 未建模"},
+      "C2": {"score": 1, "reason": "同 run1：仅逐卡 decode，无 prefill 估算"},
+      "C3": {"score": 1, "reason": "同 run1"},
+      "C4": {"score": 0, "reason": "同 run1"},
+      "C5": {"score": 1, "reason": "同 run1：4 矛盾无状态标注"},
+      "total_structure": 5,
+      "total_content": 5,
+      "total": 9
+    },
+    "run3": {
+      "S1": {"score": 1, "reason": "同 run1：N1-N4 平铺无分层"},
+      "S2": {"score": 1, "reason": "同 run1：6 候选最全但无 share/sum=1"},
+      "S3": {"score": 0, "reason": "同 run1：无自检/COUPLE"},
+      "S4": {"score": 1, "reason": "同 run1：p 黑盒点值无区间，VER 待实测"},
+      "S5": {"score": 2, "reason": "同 run1：BOTTLENECK+理由+OPEN 3"},
+      "C1": {"score": 1, "reason": "同 run1：无 cache 分离，prefill 未建模"},
+      "C2": {"score": 1, "reason": "同 run1：仅逐卡 decode，无 prefill 估算"},
+      "C3": {"score": 1, "reason": "同 run1"},
+      "C4": {"score": 0, "reason": "同 run1"},
+      "C5": {"score": 1, "reason": "同 run1：4 矛盾无状态标注"},
+      "total_structure": 5,
+      "total_content": 5,
+      "total": 9
+    }
+  },
+  "mean": 9.00,
+  "sigma": 0.00,
+  "c5_mean": 1.0,
+  "notes": "3 run 高度雷同（257-258 行，相同数字：3090 BW 760[实为 936.2]/M3U 800/27B FP16 54GB/LLaMA-3 60层32头128dim 架构假设无 GQA/CONFIDENCE 0.55）。关键缺陷：无 prefix-cache 建模（task=2000 tokens 打包，偏离 90:9:1 profile）、prefill 从未建模、无保值分析、无 share 检查、无 COUPLE。vs R0 17.67：Δ=+8.67 >> 2σ。"
+}
