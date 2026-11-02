@@ -120,7 +120,7 @@
       },
       "C2": {
         "score": 1,
-        "reason": "单硬件吞吐量建模节点到位，但 prefill/decode 逐卡严格对比缺失"
+        "reason": "识别 prefill(compute-bound)/decode(memory-bound) 双模式并给单卡估算（5760 tok/~1s），但未逐卡对比 prefill vs decode 谁 bind——按 rubric C2 判据属『识别两模式未逐卡估算』档"
       },
       "C3": {
         "score": 2,
