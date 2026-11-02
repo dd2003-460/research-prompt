@@ -1,0 +1,146 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较；判据档位与 R0~R0.5 对齐",
+  "runs": {
+    "run1": {
+      "S1": {
+        "score": 0,
+        "reason": "无五节结构——草稿流+英文（中文2%）"
+      },
+      "S2": {
+        "score": 1,
+        "reason": "候选提及但不完整"
+      },
+      "S3": {
+        "score": 0,
+        "reason": "无 SELF-CHECK 行"
+      },
+      "S4": {
+        "score": 1,
+        "reason": "[E] 标记有但无 TEST 动作"
+      },
+      "S5": {
+        "score": 0,
+        "reason": "BOTTLENECK/OPEN 均缺失"
+      },
+      "C1": {
+        "score": 1,
+        "reason": "prefill/decode 瓶颈提及但未量化"
+      },
+      "C2": {
+        "score": 0,
+        "reason": "无逐卡表"
+      },
+      "C3": {
+        "score": 1,
+        "reason": "COST 框架提及但不完整"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值提及"
+      },
+      "C5": {
+        "score": 1,
+        "reason": "CON 声明不足 2 条"
+      },
+      "total_structure": 2,
+      "total_content": 4,
+      "total": 6
+    },
+    "run2": {
+      "S1": {
+        "score": 2,
+        "reason": "五节结构完整"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖 4090/H100/A100/L40S，份额闭环"
+      },
+      "S3": {
+        "score": 2,
+        "reason": "SELF-CHECK 行出现 4 次——契约生效"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "黑盒带区间 + TEST 动作"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=Bandwidth-Bound 带理由；OPEN 有"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "compute→bandwidth 漂移判定清晰"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "逐卡数值存在但无 Prefill(s)/Decode(s) 列的正式表格——半达标"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 四因子完整，无占位符"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值进 CapEx"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON ≥2 达标"
+      },
+      "total_structure": 10,
+      "total_content": 8,
+      "total": 18
+    },
+    "run3": {
+      "S1": {
+        "score": 2,
+        "reason": "五节结构完整"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖，份额闭环"
+      },
+      "S3": {
+        "score": 0,
+        "reason": "无 SELF-CHECK 行（契约未遵循）"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "黑盒带区间 + TEST 动作"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK/OPEN 有"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "瓶颈判定清晰"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "提到 Table with Prefill(s), Decode(s) 但实际表格不完整——半达标"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 四因子完整"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值提及"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON ≥2 达标"
+      },
+      "total_structure": 8,
+      "total_content": 8,
+      "total": 16
+    }
+  },
+  "mean": 13.33,
+  "sigma": 5.03,
+  "c2_mean": 0.67,
+  "c3_mean": 1.67,
+  "notes": "R0.6 确认模型能力边界：run1 崩塌（6分），run2 达标（18分，S3契约生效），run3 半崩（16分，五节有但S3未遵循）。σ=5.03。结论：qwen3.8-27b 对多契约长 prompt 有 ~30-40% 概率失守。R0.3 仍是稳定性最优解（σ0.94）。消融实验终止于 R0.3 定版。"
+}
