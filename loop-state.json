@@ -31,5 +31,6 @@
     "2026-10-23T17:52:00 R0 subagent 6c2cbb69 + qwen3.8-bare subagent 1884799f 执行中",
     "2026-10-23T18:30:00 qwen3.8-bare subagent 1884799f 失败（网络完全阻塞，目录为空）→ Lead 自己写 qwen3.8-bare × 3 run",
     "2026-10-23T20:18:00 R0 + qwen3.8-bare 评分完成（R0 18.00/σ0.00/C5=2.00，qwen3.8-bare 14.00/σ0.00/C5=2.00）；benchmark-v2.md 更新；goal 验收标准全部达标"
-  ]
+  ],
+  "summary": "2026-11-03 R0.1/R0.2 契约消融完成（分支 ralph/prompt-contract-ablation @ 3290c5c）：R0.1 mean16.33σ0.47（C3/C4修复Δ+0.33），R0.2 run1/run2=17但run3崩到10（σ3.30，占位符+塌缩）。发现：CON-N≥2契约有效保C5；COST紧凑化没救回C2（模型本身弱项非挤占）；方差爆炸需FAIL条件+5-run中位数协议。下一步R0.3。"
 }
