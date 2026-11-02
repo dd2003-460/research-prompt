@@ -17,6 +17,7 @@ R0.5 = R0.3 三防崩机制（语言锁定/占位符FAIL/逐卡表）+ R0.4 的 
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.5/prompt.txt）
-- [ ] R0.5 × 3 run 实跑
-- [ ] 评分
-- [ ] 六版对比
+- [x] R0.5 × 3 run 实跑（max_tokens=16000，全崩 8/7/7）
+- [x] 评分（score-v2.json）
+- [x] 六版对比（COMPARISON.md）
+- [x] retest-32k 对照实验（max_tokens=32000 ×3：1/3 完整收尾，崩塌与 max_tokens 交互，见 retest-32k/README.md）

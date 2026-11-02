@@ -1,8 +1,8 @@
 {
   "project": "research-prompt",
-  "last_updated": "2026-11-03T02:05:00+08:00",
-  "last_action": "r257: R0.4 score-v2.py 机械评分器落盘；run1 FAIL（草稿区截断 0/5 节）；run2 S3=2（SELF-CHECK 新契约生效）/C2=1（缺 Prefill(s)/Decode(s) 表列）；README 中期发现已记录。等 run3 落盘 → lead 复核 8 维 → mean/σ → 五版对比。",
-  "phase": "R0.4 短板补强验证中（run1/run2 落盘，run3 进行中）",
+  "last_updated": "2026-11-03T02:20:00+08:00",
+  "last_action": "r258: retest-32k 对照实验落盘——max_tokens 16000→32000 后 R0.5 崩塌率 3/3→2/3（runA 五节 5/5 + SELF-CHECK 全覆盖），COMPARISON.md 结论修正，跨版本比较须统一 max_tokens。",
+  "phase": "消融实验完结（六版）+ retest-32k 对照修正：崩塌与 max_tokens 交互，R0.3 仍为最优定版",
   "todo": {
     "T-P0.1": "completed - research-prompt 项目建档（README/INDEX/raw/research-prompt-plain.md）",
     "T-P0.2": "completed - 创建 bench/prompts/variants/R0/prompt.txt（21 零件契约版）",
@@ -32,5 +32,5 @@
     "2026-10-23T18:30:00 qwen3.8-bare subagent 1884799f 失败（网络完全阻塞，目录为空）→ Lead 自己写 qwen3.8-bare × 3 run",
     "2026-10-23T20:18:00 R0 + qwen3.8-bare 评分完成（R0 18.00/σ0.00/C5=2.00，qwen3.8-bare 14.00/σ0.00/C5=2.00）；benchmark-v2.md 更新；goal 验收标准全部达标"
   ],
-  "summary": "2026-11-03 R0.1/R0.2 契约消融完成（分支 ralph/prompt-contract-ablation @ 3290c5c）：R0.1 mean16.33σ0.47（C3/C4修复Δ+0.33），R0.2 run1/run2=17但run3崩到10（σ3.30，占位符+塌缩）。发现：CON-N≥2契约有效保C5；COST紧凑化没救回C2（模型本身弱项非挤占）；方差爆炸需FAIL条件+5-run中位数协议。下一步R0.3。\n2026-11-03 R0.3 防崩版定版：mean 17.33 σ0.94，四版最优。三改动（语言锁定/占位符FAIL/逐卡表）全部命中目标。R0.3 vs R0 净收益 +1.33。剩余短板 S3+C2run3，R0.4 候选已列。分支 ralph/prompt-contract-ablation @ cd9c9ef 已推送。\n2026-11-03 R0.4 短板补强版：mean 16.00 σ3.46，run1 崩到 11（草稿流无结构）。S3 SELF-CHECK 契约在 run2/run3 生效（S3 1→2），方向验证成功但需防崩基线。R0.3 仍是当前最优定版（17.33/0.94）。R0.5 = R0.3 基线 + S3 SELF-CHECK。\n2026-11-03 R0.5 全面崩塌（8/7/7 mean 7.33）：qwen3.8-27b 指令遵循随机性暴露，prompt 无法完全控制。消融实验六版完结，R0.3 仍是当前最优定版（17.33/0.94）。继续加契约边际收益递减，模型能力是硬约束。\n2026-11-03 R0.6 确认模型能力边界（6/18/16 σ5.03）。七版消融正式完结：R0.3 定版（17.33/0.94），多契约叠加引入崩塌概率，prompt 层面已到极限。后续提升需换模型/分步执行/外部验证器。"
+  "summary": "2026-11-03 R0.1/R0.2 契约消融完成（分支 ralph/prompt-contract-ablation @ 3290c5c）：R0.1 mean16.33σ0.47（C3/C4修复Δ+0.33），R0.2 run1/run2=17但run3崩到10（σ3.30，占位符+塌缩）。发现：CON-N≥2契约有效保C5；COST紧凑化没救回C2（模型本身弱项非挤占）；方差爆炸需FAIL条件+5-run中位数协议。下一步R0.3。\n2026-11-03 R0.3 防崩版定版：mean 17.33 σ0.94，四版最优。三改动（语言锁定/占位符FAIL/逐卡表）全部命中目标。R0.3 vs R0 净收益 +1.33。剩余短板 S3+C2run3，R0.4 候选已列。分支 ralph/prompt-contract-ablation @ cd9c9ef 已推送。\n2026-11-03 R0.4 短板补强版：mean 16.00 σ3.46，run1 崩到 11（草稿流无结构）。S3 SELF-CHECK 契约在 run2/run3 生效（S3 1→2），方向验证成功但需防崩基线。R0.3 仍是当前最优定版（17.33/0.94）。R0.5 = R0.3 基线 + S3 SELF-CHECK。\n2026-11-03 R0.5 全面崩塌（8/7/7 mean 7.33）：qwen3.8-27b 指令遵循随机性暴露，prompt 无法完全控制。消融实验六版完结，R0.3 仍是当前最优定版（17.33/0.94）。继续加契约边际收益递减，模型能力是硬约束。\n2026-11-03 R0.6 确认模型能力边界（6/18/16 σ5.03）。七版消融正式完结：R0.3 定版（17.33/0.94），多契约叠加引入崩塌概率，prompt 层面已到极限。后续提升需换模型/分步执行/外部验证器。\\n2026-11-03 retest-32k 对照：R0.5 在 max_tokens=32000 下 3 run 中 1 个完整收尾（五节齐全+SELF-CHECK 全覆盖，但研究路径退化为 4 平铺节点无三级树）。原「~20% 随机崩塌」结论修正为「崩塌与 max_tokens 配置交互（16000 下 3/3，32000 下 2/3）」；后续消融轮次 run 脚本统一 max_tokens=32000 防截断噪声混入。retest-32k/ 目录落盘（README + runA/B/C）。"
 }
