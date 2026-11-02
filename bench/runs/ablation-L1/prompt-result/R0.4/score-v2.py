@@ -16,16 +16,29 @@ def mechanical(text):
     nodes = re.findall(r"### R-\d+(?:\.\d+)*\b", text)
     fields = {f: len(re.findall(rf"^{re.escape(f)}:\s", text, re.M)) for f in ["PARENT","NOW","GOAL","GAP","IN","OUT","KIND","RES","SHARE","BOUND","TEST"]}
     selfcheck = len(re.findall(r"SELF-CHECK:", text))
-    cost_factors = [f for f in ["折旧","能耗","运维","残值"] if re.search(rf"{f}:", text)]
+    # COST 四因子带 [E]（容忍 [E±x%] 变体写法，如 run3 的「折旧: 15000 USD [E±20%]」）
+    cost_factors = [f for f in ["折旧","能耗","运维","残值"] if re.search(rf"{f}:.*\[E", text)]
     placeholders = len(re.findall(r"\$X\b|\$Y\b|待定", text))
     has_prefill_col = bool(re.search(r"[Pp]refill\s*\(?s\)?", text))
     has_decode_col = bool(re.search(r"[Dd]ecode\s*\(?s\)?", text))
     time_nums = len(re.findall(r"\d+\.?\d*\s*(?:s|ms)\b", text))
     drift = bool(re.search(r"(compute-bound.{0,120}bandwidth-bound|bandwidth-bound.{0,120}compute-bound|瓶颈.{0,40}(漂移|迁移))", text))
     cards = set(re.findall(r"\b(A6000|A100|H100|MI300X|L40S|B200|4090|5090|M2 Ultra|M3 Ultra)\b", text))
-    # S3：R0.4 契约 —— SELF-CHECK 行覆盖节点；无行时回退 COUPLE/重叠声明档
-    if selfcheck >= max(len(nodes), 3) and len(nodes) >= 3:
-        s3, s3r = 2, f"SELF-CHECK {selfcheck} 行覆盖 {len(nodes)} 节点（全覆盖）"
+    # S3：R0.4 契约 —— SELF-CHECK 行覆盖【叶子】节点（STATUS: split 的中间节点豁免）。
+    # 叶子判定：按块切分，块内含 STATUS: split 或含子节点标题 → 中间节点，否则叶子。
+    blocks = re.split(r"(?=#{3,4}\s+R-\d)", text)
+    node_ids = []
+    for b in blocks:
+        m = re.match(r"#{3,4}\s+(R-\d+(?:\.\d+)*)", b)
+        if not m:
+            continue
+        nid = m.group(1)
+        is_mid = bool(re.search(r"STATUS:\s*split", b)) or bool(re.search(r"#{3,4}\s+" + re.escape(nid) + r"\.", b[len(m.group(0)):]))
+        node_ids.append((nid, is_mid))
+    leaves = [n for n, mid in node_ids if not mid]
+    leaf_count = len(leaves)
+    if selfcheck >= max(leaf_count, 3) and leaf_count >= 3:
+        s3, s3r = 2, f"SELF-CHECK {selfcheck} 行覆盖全部 {leaf_count} 个叶子节点（{len(node_ids)-leaf_count} 个中间节点 split 豁免）"
     elif selfcheck >= 2:
         s3, s3r = 1, f"SELF-CHECK {selfcheck} 行但未全覆盖 {len(nodes)} 节点"
     elif ("COUPLE" in text) or ("重叠" in text):
