@@ -1,0 +1,141 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制) — 机械预检版：S3/C2 自动定档，其余 8 维待 lead 复核",
+  "scorer": "score-v2.py 机械检查 + lead-agent (qwen3.8-27b) 复核；判据档位与 R0~R0.3 对齐",
+  "runs": {
+    "run1": {
+      "chars": 23290,
+      "five_sections": 0,
+      "section_detail": {
+        "## 0. 研究问题定义": false,
+        "## 1. 研究路径": false,
+        "## 2. 矛盾与张力": false,
+        "## 3. 计算与验证": false,
+        "## 4. 结论与置信度": false
+      },
+      "node_blocks": 0,
+      "field_coverage": {
+        "PARENT": 0,
+        "NOW": 0,
+        "GOAL": 0,
+        "GAP": 0,
+        "IN": 0,
+        "OUT": 0,
+        "KIND": 0,
+        "RES": 0,
+        "SHARE": 0,
+        "BOUND": 0,
+        "TEST": 0
+      },
+      "selfcheck_lines": 0,
+      "cost_factors": [],
+      "placeholders": 0,
+      "S3": {
+        "score": 0,
+        "reason": "无 COUPLE/SELF-CHECK"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "有逐卡数值但缺 Prefill(s)/Decode(s) 表列（只有 TCO 对比表），按 R0.4 契约不得满分",
+        "signals": {
+          "prefill_col": false,
+          "decode_col": false,
+          "time_nums": 15,
+          "drift": false,
+          "cards": [
+            "4090",
+            "5090",
+            "A100",
+            "H100",
+            "L40S",
+            "M2 Ultra",
+            "M3 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "verdict": "FAIL — 草稿区直接结束，未输出五节结构（max_tokens 截断或格式崩溃）"
+    },
+    "run2": {
+      "chars": 30445,
+      "five_sections": 5,
+      "section_detail": {
+        "## 0. 研究问题定义": true,
+        "## 1. 研究路径": true,
+        "## 2. 矛盾与张力": true,
+        "## 3. 计算与验证": true,
+        "## 4. 结论与置信度": true
+      },
+      "node_blocks": 5,
+      "field_coverage": {
+        "PARENT": 5,
+        "NOW": 5,
+        "GOAL": 5,
+        "GAP": 5,
+        "IN": 5,
+        "OUT": 6,
+        "KIND": 5,
+        "RES": 5,
+        "SHARE": 5,
+        "BOUND": 5,
+        "TEST": 5
+      },
+      "selfcheck_lines": 5,
+      "cost_factors": [
+        "折旧",
+        "能耗",
+        "运维",
+        "残值"
+      ],
+      "placeholders": 0,
+      "S3": {
+        "score": 2,
+        "reason": "SELF-CHECK 5 行覆盖 5 节点（全覆盖）"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "有逐卡数值但缺 Prefill(s)/Decode(s) 表列（只有 TCO 对比表），按 R0.4 契约不得满分",
+        "signals": {
+          "prefill_col": false,
+          "decode_col": false,
+          "time_nums": 42,
+          "drift": false,
+          "cards": [
+            "4090",
+            "A100",
+            "H100",
+            "L40S",
+            "M2 Ultra",
+            "M3 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    },
+    "run3": {
+      "missing": true
+    }
+  },
+  "mean": null,
+  "sigma": null,
+  "notes": "mean/σ 由 lead 在 8 维复核后补全；作废 run 不计入 mean。"
+}

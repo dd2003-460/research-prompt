@@ -23,6 +23,12 @@ R0.4 两个最小改动对症：
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.4/prompt.txt）
-- [ ] R0.4 × 3 run 实跑（本地 qwen3.8-27b @ ninfer :8787）
-- [ ] 评分（判据档位与 R0~R0.3 对齐）
-- [ ] 五版对比 R0 vs R0.1 vs R0.2 vs R0.3 vs R0.4
+- [~] R0.4 × 3 run 实跑（run1/run2 落盘，run3 进行中；run-r04.py 串行循环 @ :8787）
+- [~] 评分 — score-v2.py 机械预检已落盘：run1 **FAIL**（0/5 节，草稿区截断，作废不计入 mean）；run2 S3=2（新契约生效：5 节点全带 SELF-CHECK）、C2=1（TCO 表有但缺 Prefill(s)/Decode(s) 两列，按契约不得满分）；其余 8 维待 lead 复核
+- [ ] 五版对比 R0 vs R0.1 vs R0.2 vs R0.3 vs R0.4（等 run3 落盘 + 复核后算 mean/σ）
+
+## 中期发现（r257, run1/run2 落盘时）
+
+1. **S3 短板修复确认**：run2 五个叶子节点全部带 `SELF-CHECK: A` 行——「逐叶子自检」这条新契约在模型侧真的生效了，这是 R0~R0.3 四版都没做到的（都停在 1 分档）。
+2. **C2 短板未修复**：run2 的 CALCULATIONS 里有 TPS 数值和 TCO 对比表，但逐卡表仍没有独立的 Prefill(s)/Decode(s) 两列，也没有显式瓶颈漂移结论。prompt 里「缺任一列 C2 不得分」的强制语没压住——推测因为 C2 判据写在第 3 节格式说明里、离实际填表位置太远，而 TCO 表（第 4 节附近）先满足了「有数值对比表」的心理预期。
+3. **run1 暴露 max_tokens 风险**：草稿区写到一半就停（23K chars），五节完全没输出。R0.4 的草稿+五节双段结构比 R0.3 更长，16000 token 上限对长草稿不够用——若 run3 也崩，需把 run-r04.py 的 max_tokens 提到 24000 或加续写逻辑。
