@@ -1,146 +1,145 @@
 {
   "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
-  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较；判据档位与 R0~R0.4 对齐",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较",
+  "max_tokens": 32000,
   "runs": {
     "run1": {
       "S1": {
         "score": 0,
-        "reason": "无五节结构——整个输出是草稿流（【草稿】标记后直接写分析），无 ## 0/1/2/3/4 章节"
+        "reason": ""
       },
       "S2": {
         "score": 1,
-        "reason": "候选覆盖 4090/A100/H100/Mac，但无份额闭环声明"
+        "reason": ""
       },
       "S3": {
         "score": 0,
-        "reason": "无 SELF-CHECK 行（契约未遵循）"
+        "reason": ""
       },
       "S4": {
         "score": 1,
-        "reason": "有 [E] 标记但无 TEST 一日动作格式"
+        "reason": ""
       },
       "S5": {
-        "score": 1,
-        "reason": "BOTTLENECK 隐含在分析中但未显式标注；OPEN 缺失"
+        "score": 0,
+        "reason": ""
       },
       "C1": {
         "score": 1,
-        "reason": "prefill/decode 双模式提及但未公式化建模"
+        "reason": ""
       },
       "C2": {
-        "score": 1,
-        "reason": "逐卡数值对比存在但缺 Prefill(s)/Decode(s) 列"
+        "score": 0,
+        "reason": ""
       },
       "C3": {
         "score": 1,
-        "reason": "COST 四因子提及但不完整，有占位符倾向"
+        "reason": ""
       },
       "C4": {
         "score": 1,
-        "reason": "残值假设提及但未进 CapEx 公式"
+        "reason": ""
       },
       "C5": {
         "score": 1,
-        "reason": "CON 声明不足 2 条"
+        "reason": ""
       },
-      "total_structure": 3,
-      "total_content": 5,
-      "total": 8
+      "total_structure": 2,
+      "total_content": 4,
+      "total": 6
     },
     "run2": {
       "S1": {
         "score": 0,
-        "reason": "无五节结构——草稿流 + 英文漂移"
+        "reason": ""
       },
       "S2": {
-        "score": 1,
-        "reason": "候选覆盖但不全，无份额闭环"
+        "score": 0,
+        "reason": ""
       },
       "S3": {
         "score": 0,
-        "reason": "无 SELF-CHECK 行"
+        "reason": ""
       },
       "S4": {
-        "score": 1,
-        "reason": "[E] 标记有但无 TEST 动作"
+        "score": 0,
+        "reason": ""
       },
       "S5": {
         "score": 0,
-        "reason": "BOTTLENECK/OPEN 均缺失"
+        "reason": ""
       },
       "C1": {
-        "score": 1,
-        "reason": "prefill FLOPs / decode bandwidth 关系提及但未量化"
+        "score": 0,
+        "reason": ""
       },
       "C2": {
-        "score": 1,
-        "reason": "部分逐卡数值，不完整"
+        "score": 0,
+        "reason": ""
       },
       "C3": {
-        "score": 1,
-        "reason": "COST 框架提及但计算链断裂"
+        "score": 0,
+        "reason": ""
       },
       "C4": {
-        "score": 1,
-        "reason": "残值提及"
+        "score": 0,
+        "reason": ""
       },
       "C5": {
-        "score": 1,
-        "reason": "CON 声明不足"
+        "score": 0,
+        "reason": ""
       },
-      "total_structure": 2,
-      "total_content": 5,
-      "total": 7
+      "total_structure": 0,
+      "total_content": 0,
+      "total": 0
     },
     "run3": {
       "S1": {
         "score": 0,
-        "reason": "无五节结构——草稿流 + 英文漂移"
+        "reason": ""
       },
       "S2": {
-        "score": 1,
-        "reason": "候选覆盖 4090x2/A100/L40S，无份额闭环"
+        "score": 0,
+        "reason": ""
       },
       "S3": {
         "score": 0,
-        "reason": "无 SELF-CHECK 行"
+        "reason": ""
       },
       "S4": {
-        "score": 1,
-        "reason": "[E] 标记有但无 TEST 动作"
+        "score": 0,
+        "reason": ""
       },
       "S5": {
         "score": 0,
-        "reason": "BOTTLENECK/OPEN 均缺失"
+        "reason": ""
       },
       "C1": {
-        "score": 1,
-        "reason": "prefill/decode 瓶颈判断有但未公式化"
+        "score": 0,
+        "reason": ""
       },
       "C2": {
-        "score": 1,
-        "reason": "逐卡数值部分存在"
+        "score": 0,
+        "reason": ""
       },
       "C3": {
-        "score": 1,
-        "reason": "COST 框架提及，有占位符（待定）"
+        "score": 0,
+        "reason": ""
       },
       "C4": {
-        "score": 1,
-        "reason": "残值提及"
+        "score": 0,
+        "reason": ""
       },
       "C5": {
-        "score": 1,
-        "reason": "CON 声明不足"
+        "score": 0,
+        "reason": ""
       },
-      "total_structure": 2,
-      "total_content": 5,
-      "total": 7
+      "total_structure": 0,
+      "total_content": 0,
+      "total": 0
     }
   },
-  "mean": 7.33,
-  "sigma": 0.47,
-  "c2_mean": 1.0,
-  "c3_mean": 1.0,
-  "notes": "R0.5 全面崩塌：三个 run 全部停在草稿阶段，没有进入正式五节结构。语言锁定失效（中文比例 6%/12%/8%），SELF-CHECK 契约零遵循，占位符出现（run3）。根因：R0.5 的 prompt 在 R0.3 基础上只加了一行 S3 SELF-CHECK 契约，但 R0.3 的语言锁定和占位符FAIL 机制在 R0.5 里完全没生效——模型把整个输出都当成草稿处理了，连'Ready to write'/'Proceeding to formal output'都写在结尾，说明它知道该写正式输出但没写。这是模型层面的不稳定（qwen3.8-27b 对长 prompt 的指令遵循能力有限），不是 prompt 设计问题。结论：R0.3 仍是当前最优定版（17.33/0.94），R0.5 的失败是模型能力边界暴露，不是方向错误。"
+  "mean": 2.0,
+  "sigma": 2.83,
+  "notes": "32k 下 R0.5 仍 3/3 崩塌 — run2/run3 是纯英文草稿流，比 run1 更差。不是 max_tokens 问题，是模型对 S3 契约的随机失守"
 }

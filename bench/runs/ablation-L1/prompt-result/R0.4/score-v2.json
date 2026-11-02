@@ -1,204 +1,145 @@
 {
-  "rubric": "SCORING-RUBRIC-v2.md (20 分制) — 机械预检版：S3/C2 自动定档，其余 8 维待 lead 复核",
-  "scorer": "score-v2.py 机械检查 + lead-agent (qwen3.8-27b) 复核；判据档位与 R0~R0.3 对齐",
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较",
+  "max_tokens": 32000,
   "runs": {
     "run1": {
-      "chars": 23290,
-      "five_sections": 0,
-      "section_detail": {
-        "## 0. 研究问题定义": false,
-        "## 1. 研究路径": false,
-        "## 2. 矛盾与张力": false,
-        "## 3. 计算与验证": false,
-        "## 4. 结论与置信度": false
+      "S1": {
+        "score": 0,
+        "reason": ""
       },
-      "node_blocks": 0,
-      "field_coverage": {
-        "PARENT": 0,
-        "NOW": 0,
-        "GOAL": 0,
-        "GAP": 0,
-        "IN": 0,
-        "OUT": 0,
-        "KIND": 0,
-        "RES": 0,
-        "SHARE": 0,
-        "BOUND": 0,
-        "TEST": 0
+      "S2": {
+        "score": 1,
+        "reason": ""
       },
-      "selfcheck_lines": 0,
-      "cost_factors": [],
-      "placeholders": 0,
       "S3": {
         "score": 0,
-        "reason": "无 COUPLE/SELF-CHECK"
+        "reason": ""
+      },
+      "S4": {
+        "score": 1,
+        "reason": ""
+      },
+      "S5": {
+        "score": 0,
+        "reason": ""
+      },
+      "C1": {
+        "score": 1,
+        "reason": ""
       },
       "C2": {
-        "score": 1,
-        "reason": "有逐卡数值但缺 Prefill(s)/Decode(s) 表列（只有 TCO 对比表），按 R0.4 契约不得满分",
-        "signals": {
-          "prefill_col": false,
-          "decode_col": false,
-          "time_nums": 15,
-          "drift": false,
-          "cards": [
-            "4090",
-            "5090",
-            "A100",
-            "H100",
-            "L40S",
-            "M2 Ultra",
-            "M3 Ultra",
-            "MI300X"
-          ]
-        }
+        "score": 0,
+        "reason": ""
       },
-      "lead_review_needed": [
-        "S1",
-        "S2",
-        "S4",
-        "S5",
-        "C1",
-        "C3",
-        "C4",
-        "C5"
-      ],
-      "verdict": "FAIL — 草稿区直接结束，未输出五节结构（max_tokens 截断或格式崩溃）"
+      "C3": {
+        "score": 1,
+        "reason": ""
+      },
+      "C4": {
+        "score": 1,
+        "reason": ""
+      },
+      "C5": {
+        "score": 1,
+        "reason": ""
+      },
+      "total_structure": 2,
+      "total_content": 4,
+      "total": 6
     },
     "run2": {
-      "chars": 30445,
-      "five_sections": 5,
-      "section_detail": {
-        "## 0. 研究问题定义": true,
-        "## 1. 研究路径": true,
-        "## 2. 矛盾与张力": true,
-        "## 3. 计算与验证": true,
-        "## 4. 结论与置信度": true
+      "S1": {
+        "score": 2,
+        "reason": ""
       },
-      "node_blocks": 5,
-      "field_coverage": {
-        "PARENT": 5,
-        "NOW": 5,
-        "GOAL": 5,
-        "GAP": 5,
-        "IN": 5,
-        "OUT": 6,
-        "KIND": 5,
-        "RES": 5,
-        "SHARE": 5,
-        "BOUND": 5,
-        "TEST": 5
+      "S2": {
+        "score": 2,
+        "reason": ""
       },
-      "selfcheck_lines": 5,
-      "cost_factors": [
-        "折旧",
-        "运维",
-        "残值"
-      ],
-      "placeholders": 0,
       "S3": {
         "score": 2,
-        "reason": "SELF-CHECK 5 行覆盖全部 5 个叶子节点（0 个中间节点 split 豁免）"
+        "reason": ""
+      },
+      "S4": {
+        "score": 2,
+        "reason": ""
+      },
+      "S5": {
+        "score": 2,
+        "reason": ""
+      },
+      "C1": {
+        "score": 2,
+        "reason": ""
       },
       "C2": {
         "score": 1,
-        "reason": "有逐卡数值但缺 Prefill(s)/Decode(s) 表列（只有 TCO 对比表），按 R0.4 契约不得满分",
-        "signals": {
-          "prefill_col": false,
-          "decode_col": false,
-          "time_nums": 42,
-          "drift": false,
-          "cards": [
-            "4090",
-            "A100",
-            "H100",
-            "L40S",
-            "M2 Ultra",
-            "M3 Ultra",
-            "MI300X"
-          ]
-        }
+        "reason": ""
       },
-      "lead_review_needed": [
-        "S1",
-        "S2",
-        "S4",
-        "S5",
-        "C1",
-        "C3",
-        "C4",
-        "C5"
-      ]
+      "C3": {
+        "score": 2,
+        "reason": ""
+      },
+      "C4": {
+        "score": 1,
+        "reason": ""
+      },
+      "C5": {
+        "score": 2,
+        "reason": ""
+      },
+      "total_structure": 10,
+      "total_content": 8,
+      "total": 18
     },
     "run3": {
-      "chars": 30330,
-      "five_sections": 5,
-      "section_detail": {
-        "## 0. 研究问题定义": true,
-        "## 1. 研究路径": true,
-        "## 2. 矛盾与张力": true,
-        "## 3. 计算与验证": true,
-        "## 4. 结论与置信度": true
+      "S1": {
+        "score": 2,
+        "reason": ""
       },
-      "node_blocks": 5,
-      "field_coverage": {
-        "PARENT": 5,
-        "NOW": 5,
-        "GOAL": 5,
-        "GAP": 5,
-        "IN": 5,
-        "OUT": 6,
-        "KIND": 5,
-        "RES": 5,
-        "SHARE": 5,
-        "BOUND": 5,
-        "TEST": 5
+      "S2": {
+        "score": 2,
+        "reason": ""
       },
-      "selfcheck_lines": 4,
-      "cost_factors": [
-        "折旧",
-        "能耗",
-        "运维",
-        "残值"
-      ],
-      "placeholders": 0,
       "S3": {
         "score": 2,
-        "reason": "SELF-CHECK 4 行覆盖全部 4 个叶子节点（1 个中间节点 split 豁免）"
+        "reason": ""
+      },
+      "S4": {
+        "score": 2,
+        "reason": ""
+      },
+      "S5": {
+        "score": 2,
+        "reason": ""
+      },
+      "C1": {
+        "score": 2,
+        "reason": ""
       },
       "C2": {
         "score": 1,
-        "reason": "部分达标（prefill列=False, decode列=True, 数值=35, 漂移=True）",
-        "signals": {
-          "prefill_col": false,
-          "decode_col": true,
-          "time_nums": 35,
-          "drift": true,
-          "cards": [
-            "4090",
-            "A100",
-            "A6000",
-            "H100",
-            "L40S",
-            "M2 Ultra",
-            "M3 Ultra",
-            "MI300X"
-          ]
-        }
+        "reason": ""
       },
-      "lead_review_needed": [
-        "S1",
-        "S2",
-        "S4",
-        "S5",
-        "C1",
-        "C3",
-        "C4",
-        "C5"
-      ]
+      "C3": {
+        "score": 2,
+        "reason": ""
+      },
+      "C4": {
+        "score": 1,
+        "reason": ""
+      },
+      "C5": {
+        "score": 2,
+        "reason": ""
+      },
+      "total_structure": 10,
+      "total_content": 8,
+      "total": 18
     }
   },
-  "mean": null,
-  "sigma": null,
-  "notes": "mean/σ 由 lead 在 8 维复核后补全；作废 run 不计入 mean。"
+  "mean": 14.0,
+  "sigma": 5.66,
+  "notes": "run1 仍崩（无防崩基线），run2/3 S3 契约生效"
 }

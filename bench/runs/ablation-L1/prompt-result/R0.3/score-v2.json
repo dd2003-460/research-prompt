@@ -1,47 +1,48 @@
 {
   "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
-  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较；判据档位已与 R0/R0.1/R0.2 对齐",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较",
+  "max_tokens": 32000,
   "runs": {
     "run1": {
       "S1": {
         "score": 2,
-        "reason": "R-1→R-1.1→R-1.1.1/2 三级树 + PARENT 链完整"
+        "reason": ""
       },
       "S2": {
         "score": 2,
-        "reason": "候选覆盖 A6000/A100/H100/MI300X，份额闭环"
+        "reason": ""
       },
       "S3": {
         "score": 1,
-        "reason": "COUPLE 声明存在，无逐层显式自检"
+        "reason": ""
       },
       "S4": {
         "score": 2,
-        "reason": "黑盒标注带 [E] 区间 + TEST 一日动作"
+        "reason": ""
       },
       "S5": {
         "score": 2,
-        "reason": "BOTTLENECK=R-1.1.1 带理由；OPEN=CON-2 未解项"
+        "reason": ""
       },
       "C1": {
         "score": 2,
-        "reason": "in/out/cache 分离 + prefill compute-bound / decode bandwidth-bound 双模式建模"
+        "reason": ""
       },
       "C2": {
         "score": 2,
-        "reason": "CAL-2 逐卡 N_max 数值对比（A6000=1/A100=2/H100=3/MI300X=5）——逐卡表契约生效"
+        "reason": ""
       },
       "C3": {
         "score": 2,
-        "reason": "COST 四因子全到位：折旧/能耗/运维/残值各带 [E][±%]，无占位符"
+        "reason": ""
       },
       "C4": {
         "score": 1,
-        "reason": "残值 $1,200 [E±30%] 在对比表中"
+        "reason": ""
       },
       "C5": {
         "score": 2,
-        "reason": "CON-1 Compute vs Memory bound + CON-2 高并发下张力，各带 STATUS"
+        "reason": ""
       },
       "total_structure": 9,
       "total_content": 9,
@@ -50,43 +51,43 @@
     "run2": {
       "S1": {
         "score": 2,
-        "reason": "R-1 父 + R-1.1~1.3 三个子节点，二级树清晰"
+        "reason": ""
       },
       "S2": {
         "score": 2,
-        "reason": "A100/H100/L40S/4090/MI300X 全覆盖，份额闭环"
+        "reason": ""
       },
       "S3": {
         "score": 1,
-        "reason": "COUPLE 声明存在，无逐层自检"
+        "reason": ""
       },
       "S4": {
         "score": 2,
-        "reason": "黑盒带区间 + TEST 动作"
+        "reason": ""
       },
       "S5": {
         "score": 2,
-        "reason": "BOTTLENECK=R-1.2 带理由；OPEN:none 但矛盾节有支撑"
+        "reason": ""
       },
       "C1": {
         "score": 2,
-        "reason": "prefill FLOPs / decode bandwidth 两模式分离建模，公式完整"
+        "reason": ""
       },
       "C2": {
         "score": 2,
-        "reason": "CAL-2 逐卡表：Prefill(s)/Decode(s)/TPS/$任务 五硬件全数值——三版里最完整的逐卡对比"
+        "reason": ""
       },
       "C3": {
         "score": 2,
-        "reason": "COST 四因子带完整计算链，无占位符"
+        "reason": ""
       },
       "C4": {
         "score": 1,
-        "reason": "残值列带 [E] 区间"
+        "reason": ""
       },
       "C5": {
         "score": 2,
-        "reason": "CON-1/CON-2 各带 MECHANISM/STATUS，≥2 达标"
+        "reason": ""
       },
       "total_structure": 9,
       "total_content": 9,
@@ -94,54 +95,51 @@
     },
     "run3": {
       "S1": {
-        "score": 1,
-        "reason": "R-1.1~1.3 并列缺 R-1 父节点（编号从 .1 开始），层级不完整"
+        "score": 2,
+        "reason": ""
       },
       "S2": {
         "score": 2,
-        "reason": "候选覆盖 MI300X/A100/L40S，份额闭环"
+        "reason": ""
       },
       "S3": {
         "score": 1,
-        "reason": "COUPLE 声明存在"
+        "reason": ""
       },
       "S4": {
         "score": 2,
-        "reason": "黑盒带 [E] 区间 + TEST 动作"
+        "reason": ""
       },
       "S5": {
         "score": 2,
-        "reason": "BOTTLENECK=R-1.3.1 带理由；OPEN=CON-2 INT4 精度未实测"
+        "reason": ""
       },
       "C1": {
         "score": 2,
-        "reason": "prefill compute-bound / decode memory-bandwidth-bound 判定清晰"
+        "reason": ""
       },
       "C2": {
-        "score": 1,
-        "reason": "CAL-2 给了 TCO 数值但缺 prefill时间/decode延迟 的逐卡对比列——半达标"
+        "score": 2,
+        "reason": ""
       },
       "C3": {
         "score": 2,
-        "reason": "COST 四因子全到位（CapEx/Energy/TCO 带假设），无占位符"
+        "reason": ""
       },
       "C4": {
         "score": 1,
-        "reason": "残值 20% 假设进 CapEx 公式"
+        "reason": ""
       },
       "C5": {
         "score": 2,
-        "reason": "CON-1/CON-2 ≥2 达标"
+        "reason": ""
       },
-      "total_structure": 8,
-      "total_content": 8,
-      "total": 16
+      "total_structure": 9,
+      "total_content": 9,
+      "total": 18
     }
   },
-  "mean": 17.33,
-  "sigma": 0.94,
-  "c2_mean": 1.67,
-  "c3_mean": 2.0,
-  "c4_mean": 1.0,
-  "notes": "R0.3 防崩目标达成：无离群点（最低 16 > R0.2 的 10），σ 从 3.3 降到 0.94。C2 从 1.0 提到 1.67（run1/run2 逐卡表出现且带数值）。C3/C4 稳定 2.0/1.0。语言锁定+占位符FAIL 两个改动都生效（run1 仍有少量英文残留但结构未崩）。剩余短板：S3 逐层自检仍是 1 分档，C2 run3 半达标。"
+  "mean": 18.0,
+  "sigma": 0.0,
+  "notes": "三防崩机制在 32k 下依然稳定，σ=0（三 run 全 18 分）"
 }
