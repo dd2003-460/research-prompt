@@ -99,7 +99,7 @@
       "placeholders": 0,
       "S3": {
         "score": 2,
-        "reason": "SELF-CHECK 5 行覆盖 5 节点（全覆盖）"
+        "reason": "SELF-CHECK 5 行覆盖全部 5 个叶子节点（0 个中间节点 split 豁免）"
       },
       "C2": {
         "score": 1,
@@ -129,13 +129,147 @@
         "C3",
         "C4",
         "C5"
-      ]
+      ],
+      "lead_review": {
+        "S1": {
+          "score": 1,
+          "reason": "5 节点块 + PARENT 5/5 + 最大深度 1"
+        },
+        "S2": {
+          "score": 2,
+          "reason": "7 卡 + SHARE 5 处"
+        },
+        "S4": {
+          "score": 2,
+          "reason": "[E] 6 处 + TEST 5 处"
+        },
+        "S5": {
+          "score": 2,
+          "reason": "BOTTLENECK + OPEN 双声明"
+        },
+        "C1": {
+          "score": 2,
+          "reason": "cache/prefill/decode 三阶段 + 双模式"
+        },
+        "C3": {
+          "score": 1,
+          "reason": "3/4 带 [E]，缺 ['能耗']"
+        },
+        "C4": {
+          "score": 2,
+          "reason": "残值列在 TCO 对比表"
+        },
+        "C5": {
+          "score": 1,
+          "reason": "2 个矛盾"
+        }
+      },
+      "total": 16
     },
     "run3": {
-      "missing": true
+      "chars": 30330,
+      "five_sections": 5,
+      "section_detail": {
+        "## 0. 研究问题定义": true,
+        "## 1. 研究路径": true,
+        "## 2. 矛盾与张力": true,
+        "## 3. 计算与验证": true,
+        "## 4. 结论与置信度": true
+      },
+      "node_blocks": 5,
+      "field_coverage": {
+        "PARENT": 5,
+        "NOW": 5,
+        "GOAL": 5,
+        "GAP": 5,
+        "IN": 5,
+        "OUT": 6,
+        "KIND": 5,
+        "RES": 5,
+        "SHARE": 5,
+        "BOUND": 5,
+        "TEST": 5
+      },
+      "selfcheck_lines": 4,
+      "cost_factors": [
+        "折旧",
+        "能耗",
+        "运维",
+        "残值"
+      ],
+      "placeholders": 0,
+      "S3": {
+        "score": 2,
+        "reason": "SELF-CHECK 4 行覆盖全部 4 个叶子节点（1 个中间节点 split 豁免）"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "部分达标（prefill列=False, decode列=True, 数值=35, 漂移=True）",
+        "signals": {
+          "prefill_col": false,
+          "decode_col": true,
+          "time_nums": 35,
+          "drift": true,
+          "cards": [
+            "4090",
+            "A100",
+            "A6000",
+            "H100",
+            "L40S",
+            "M2 Ultra",
+            "M3 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "lead_review": {
+        "S1": {
+          "score": 2,
+          "reason": "5 节点块 + PARENT 5/5 + 最大深度 2"
+        },
+        "S2": {
+          "score": 2,
+          "reason": "8 卡 + SHARE 5 处"
+        },
+        "S4": {
+          "score": 1,
+          "reason": "[E] 2/TEST 5"
+        },
+        "S5": {
+          "score": 2,
+          "reason": "BOTTLENECK + OPEN 双声明"
+        },
+        "C1": {
+          "score": 2,
+          "reason": "cache/prefill/decode 三阶段 + 双模式"
+        },
+        "C3": {
+          "score": 1,
+          "reason": "0/4 带 [E]，缺 ['折旧', '能耗', '运维', '残值']"
+        },
+        "C4": {
+          "score": 2,
+          "reason": "残值列在 TCO 对比表"
+        },
+        "C5": {
+          "score": 1,
+          "reason": "2 个矛盾"
+        }
+      },
+      "total": 16
     }
   },
-  "mean": null,
-  "sigma": null,
-  "notes": "mean/σ 由 lead 在 8 维复核后补全；作废 run 不计入 mean。"
+  "mean": 16,
+  "sigma": 0.0,
+  "notes": "run1 作废（草稿区截断 0/5 节，不计入 mean）。有效 run2/run3：mean=16 σ=0.0。S3 新契约两 run 均生效（叶子节点全覆盖 SELF-CHECK，中间 split 节点豁免）；C2 仍停在 1 分档——逐卡表有 TCO 数值但无独立 Prefill(s)/Decode(s) 两列，按 R0.4 契约不得满分。对照 R0.3 mean=17.33（含 3 有效 run）：R0.4 同口径（run1 作废后仅 2 有效 run）均值 16.5，短板修复换来的是结构合规而非均值提升；且 run1 暴露 max_tokens 截断风险，实际可用率 2/3。"
 }
