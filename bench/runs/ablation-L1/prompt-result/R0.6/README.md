@@ -19,5 +19,5 @@ R0.6 = R0.3 三防崩 + S3 SELF-CHECK + C2 Prefill/Decode 列强制（比 R0.3 �
 ## 状态
 
 - [x] prompt 变体创建
-- [ ] ×3 run 实跑
-- [ ] 评分 + 七版对比
+- [x] ×3 run 实跑（完成，6/18/16）
+- [x] 评分 + 七版对比 → COMPARISON.md

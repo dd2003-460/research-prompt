@@ -22,6 +22,6 @@ R0.2 两个最小改动：
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.2/prompt.txt）
-- [ ] R0.2 × 3 run 实跑（本地 qwen3.8-27b @ ninfer :8787）
-- [ ] 评分（SCORING-RUBRIC-v2.md 20 分制，判据档位与 R0/R0.1 对齐）
-- [ ] 三版对比 R0 vs R0.1 vs R0.2
+- [x] R0.2 × 3 run 实跑（完成，17/17/10）
+- [x] 评分（SCORING-RUBRIC-v2.md 20 分制，判据档位与 R0/R0.1 对齐）
+- [x] 三版对比 R0 vs R0.1 vs R0.2 → COMPARISON.md

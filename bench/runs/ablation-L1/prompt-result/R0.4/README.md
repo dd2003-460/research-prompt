@@ -23,9 +23,9 @@ R0.4 两个最小改动对症：
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.4/prompt.txt）
-- [~] R0.4 × 3 run 实跑（run1/run2 落盘，run3 进行中；run-r04.py 串行循环 @ :8787）
-- [~] 评分 — score-v2.py 机械预检已落盘：run1 **FAIL**（0/5 节，草稿区截断，作废不计入 mean）；run2 S3=2（新契约生效：5 节点全带 SELF-CHECK）、C2=1（TCO 表有但缺 Prefill(s)/Decode(s) 两列，按契约不得满分）；其余 8 维待 lead 复核
-- [ ] 五版对比 R0 vs R0.1 vs R0.2 vs R0.3 vs R0.4（等 run3 落盘 + 复核后算 mean/σ）
+- [x] R0.4 × 3 run 实跑（完成，6/18/18，run1 崩塌）
+- [x] 评分 — score-v2.json（run1 FAIL 作废不计入 mean，mean=14.00 σ5.66）
+- [x] 五版对比 R0 vs R0.1 vs R0.2 vs R0.3 vs R0.4 → COMPARISON.md
 
 ## 中期发现（r257, run1/run2 落盘时）
 

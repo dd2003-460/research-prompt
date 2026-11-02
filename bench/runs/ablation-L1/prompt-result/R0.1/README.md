@@ -22,6 +22,6 @@ R0.1 在 R0 基础上加两条契约（最小改动，只动第 0 节和第 4 �
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.1/prompt.txt）
-- [ ] R0.1 × 3 run 实跑
-- [ ] 评分（SCORING-RUBRIC-v2.md 20 分制）
-- [ ] 与 R0 基线对比（Δ 显著性）
+- [x] R0.1 × 3 run 实跑（完成，16/16/17）
+- [x] 评分（SCORING-RUBRIC-v2.md 20 分制）
+- [x] 与 R0 基线对比（Δ 显著性）→ COMPARISON.md

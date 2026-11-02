@@ -25,6 +25,6 @@ R0.3 三个最小改动对症：
 ## 状态
 
 - [x] prompt 变体创建（bench/prompts/variants/R0.3/prompt.txt）
-- [ ] R0.3 × 3 run 实跑（本地 qwen3.8-27b @ ninfer :8787）
-- [ ] 评分（判据档位与 R0/R0.1/R0.2 对齐）
-- [ ] 四版对比 R0 vs R0.1 vs R0.2 vs R0.3
+- [x] R0.3 × 3 run 实跑（完成，18/18/18 σ=0，32k 定版）
+- [x] 评分（判据档位与 R0/R0.1/R0.2 对齐）
+- [x] 四版对比 R0 vs R0.1 vs R0.2 vs R0.3 → COMPARISON.md
