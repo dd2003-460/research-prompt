@@ -1,0 +1,147 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较；判据档位已与 R0/R0.1 对齐（S3: 仅 COUPLE=1 分）",
+  "mapping_note": "R0.2 契约：COST 一行一因子 + CON-N≥2。run3 英文输出且第3节塌缩为占位符——契约遵循度随 run 波动，这是真实观测不是评分噪声。",
+  "runs": {
+    "run1": {
+      "S1": {
+        "score": 2,
+        "reason": "R-1 父节点 + R-1.1/R-1.2 子节点 + R-1.2.1/R-1.2.2 孙节点，PARENT 链完整三级树"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖数据中心卡+消费级+Apple Silicon，份额闭环"
+      },
+      "S3": {
+        "score": 1,
+        "reason": "COUPLE 声明存在，无逐层显式自检"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "黑盒标注带 [E] 区间 + TEST 一日动作"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=R-1.2 带理由；OPEN:none 但矛盾节有未解项支撑"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "in/out/cache 分离 + prefill/decode 双瓶颈模式建模"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "识别双模式并给 A100/H100 定性对比（H100 溢价不值），但未逐卡给出 prefill 时间 vs decode 时间的数值对比"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 四因子紧凑格式全到位：折旧/能耗/运维/残值各带 [E][±%]"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值列在对比表中带区间，谱系区分出现"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON-1 高带宽溢价vs吞吐收益 + CON-2 高并发vs显存碎片化，各带 STATUS/VERIFICATION/IMPACT——对称契约生效"
+      },
+      "total_structure": 9,
+      "total_content": 8,
+      "total": 17
+    },
+    "run2": {
+      "S1": {
+        "score": 2,
+        "reason": "R-1 父 + R-1.1~R-1.4 四个候选/策略子节点，二级树清晰"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "A100/L40S/M2U/量化策略全覆盖，份额闭环"
+      },
+      "S3": {
+        "score": 1,
+        "reason": "COUPLE 声明存在，无逐层自检"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "黑盒带区间 + TEST 动作（nvidia-smi 实测类）"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=R-1.2 L40S 速度瓶颈带理由；OPEN=CON-2 量化精度对成功率影响（未解）"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "缓存命中/prefill/decode 三场景分离建模，FLOPs∝N_new 显式"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "prefill/decode 两模式识别，但逐卡 prefill vs decode 时间数值对比缺失"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 四因子带完整计算链：300W×24h×365d×$0.15=$394/年、残值 12000×0.2=$2400——比 R0.1 更具体"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值 $2400 带折旧曲线假设 [E]"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON-1 显存容量vs带宽利用率 + CON-2 量化精度vs业务准确率，≥2 达标——run2 是 R0.1 里掉到 1 分的那类 run，这次被契约兜住了"
+      },
+      "total_structure": 9,
+      "total_content": 8,
+      "total": 17
+    },
+    "run3": {
+      "S1": {
+        "score": 1,
+        "reason": "英文输出，研究路径退化为 5 行编号列表，无 PARENT/SHARE 结构字段——契约格式未遵循"
+      },
+      "S2": {
+        "score": 1,
+        "reason": "候选在草稿里覆盖（4090/A100/M2U），但正式节无份额拆分"
+      },
+      "S3": {
+        "score": 0,
+        "reason": "无任何 COUPLE/自检声明"
+      },
+      "S4": {
+        "score": 1,
+        "reason": "COST 有 [E] 标记但全是 $X/$Y 占位符未填值；无 TEST 一日动作"
+      },
+      "S5": {
+        "score": 1,
+        "reason": "BOTTLENECK=Memory Bandwidth 但无理由连乘；OPEN:None 与矛盾节 CON 状态不一致"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "草稿里 in/out/cache 90:9:1 分离 + prefill/decode bound 判定（Decode 15s > Prefill 1-2s）清晰"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "CON-2 里给了 A100 prefill ~1-2s vs decode ~15s 的数值对比——实际达标边缘，但不在正式计算节而在矛盾节，按 rubric 严格判 1"
+      },
+      "C3": {
+        "score": 1,
+        "reason": "COST 四因子列出但 Depreciation=$X/yr、Energy=$Y/yr 是占位符没算——契约形式遵循、内容未完成"
+      },
+      "C4": {
+        "score": 0,
+        "reason": "Residual: $0 [E]——直接写零，无残值分析"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON-1 高并发vs单流速度 + CON-2 Compute vs Memory Bound，各带 MECHANISM/STATUS——数量达标"
+      },
+      "total_structure": 4,
+      "total_content": 6,
+      "total": 10
+    }
+  },
+  "mean": 14.67,
+  "sigma": 3.3,
+  "c3_mean": 1.67,
+  "c4_mean": 0.67,
+  "notes": "R0.2 结果分裂：run1/run2 均 17 分（C3/C4/C5 全保住，C2 仍 1），run3 崩到 8 分（英文输出+占位符+第3节塌缩）。σ 从 R0.1 的 0.47 爆到 4.0。结论：两个契约（COST 紧凑化 + CON-N≥2）在 run1/run2 上精确达成设计目标（C5 回 2、C3 保 2），但模型对契约的遵循不稳定——run3 说明 prompt 约束没有硬性保证，3-run 均值被离群点拖垮。下一步方向：① 把『禁止占位符 $X/$Y，所有 COST 因子必须填数值』写成显式 FAIL 条件；② 或接受方差，跑 5-run 取中位数而非均值。"
+}
