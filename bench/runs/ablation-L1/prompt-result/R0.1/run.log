@@ -1,0 +1,11 @@
+all: 调用中...
+  [160s] 21389 chars
+all: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.1/all.md
+=== run2 开始 ===
+run2: 调用中...
+  [267s] 30254 chars
+run2: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.1/run2.md
+=== run3 开始 ===
+run3: 调用中...
+  [214s] 32802 chars
+run3: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.1/run3.md

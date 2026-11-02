@@ -1,0 +1,147 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20 分制)",
+  "scorer": "lead-agent (qwen3.8-27b) — 同族判官，分数作相对比较",
+  "mapping_note": "S1 树形分层→研究路径节点+PARENT 层级; S2 完备→候选硬件全+SHARE 闭环; S3 不重叠→COUPLE/显式自检; S4 黑盒→blackbox 标注+区间+TEST 一日动作; S5 瓶颈→BOTTLENECK+REASON(连乘)+OPEN 矛盾; C1-C5 按 rubric 判据。R0.1 新增契约：COST 字段 + 第4节对比表（残值列强制）。",
+  "runs": {
+    "run1": {
+      "S1": {
+        "score": 1,
+        "reason": "R-1.1~R-1.6 六个节点全部 PARENT:ROOT，平铺无二级子节点（与 R0 run1 相同模式）"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖 3090/4090/A100/H100/M2U/M3U 六类；SHARE 0.10+0.15+0.25+0.30+0.10+0.10=1.00 闭环"
+      },
+      "S3": {
+        "score": 1,
+        "reason": "有 COUPLE 声明（显存×带宽杀伤实验），但无逐层不重叠自检小节"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "KIND:blackbox 节点带 TEST 动作（Roofline 反解 B、官网查价）；P_succ 用文献估计 [0.75,0.9] 区间；VER 给一日验证路径"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=R-1.3 带 SHARE×BOUND 连乘理由；OPEN=CON-1 未解矛盾（量化对成功率影响）；RECOMMENDATION 给条件分支（Dual 4090 效率 <60% → A100，>80% → Dual 4090）"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "in/out/cache 90:9:1 分离建模，prefill=compute-bound / decode=memory-bound 双瓶颈模式明确"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "识别 prefill/decode 两模式并给各卡估算，但属近似粗算，非严格逐卡 prefill vs decode 对比"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 字段四因子全分解：购置/折旧(3年直线至残值)、能耗(24/7×$0.15/kWh)、运维(硬件成本2%/年)、残值[E]——比 R0 的『运维未单独分解』前进一级"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "对比表残值列全填且带区间：A100 $6000(50%)、4090 $400(25%)、M2U $2500(50%)；注明二手市场活跃度差异——从 R0 的 0 分前进"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "≥2 可验证矛盾带状态：CON-1 量化vs通过率 unresolved(±15%，Pass@1 实测路径)；CON-2 带宽vs批处理 resolved(Batch-Latency 拐点)"
+      },
+      "total_structure": 8,
+      "total_content": 8,
+      "total": 16
+    },
+    "run2": {
+      "S1": {
+        "score": 2,
+        "reason": "R-1 父节点 + R-1.1/R-1.2/R-1.3 三个子节点，PARENT:R-1 显式二级树（与 R0 run2/run3 同模式）"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖最全：3090/4090/A6000/A100/H100/RTX6000/M2U/M3U 八类；SHARE 0.40+0.60=1.00 闭环（blackbox 节点 SHARE 0.00 豁免）"
+      },
+      "S3": {
+        "score": 1,
+        "reason": "COUPLE: R-1.1×R-1.2 共享算力+OOM 杀伤实验；无逐层不重叠自检"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "KIND:blackbox 节点（硬件数据调研）带 TEST：官网+电商记录售价/TDP/显存/带宽；KV 公式显式给出"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=R-1.2 带宽，SHARE(0.60)×BOUND(2.0x)=1.20 全路径最大；OPEN:none 但有注：FP16 KV 下 A100 失效需升级双 A100/H100（隐含未解张力）"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "64K 上下文拆 57600 缓存读/5760 prefill/640 decode，显存需求公式 Mem=P_weights+N_layers×N_heads×D_head×SeqLen×Dtype_KV 显式"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "Speed≈BW/Mem_PerToken 逐卡对比到位，但 prefill vs decode 谁 bind 未严格判定"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "COST 四因子分解完整：折旧(3年)、能耗(满载24/7)、运维($500/年 A100)、残值[E±20%]；对比表全周期净成本=折旧+能耗+运维-残值"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值列带区间 [±20%]，注明 A100/H100 企业二手市场需求高保值率较高、消费级贬值快——谱系区分出现"
+      },
+      "C5": {
+        "score": 1,
+        "reason": "仅 CON-1 一个矛盾（显存vs带宽，resolved）；INT4 量化假设在注里提及但未立为矛盾条目——低于 R0 基线的 ≥2 标准"
+      },
+      "total_structure": 9,
+      "total_content": 7,
+      "total": 16
+    },
+    "run3": {
+      "S1": {
+        "score": 2,
+        "reason": "R-1.1/R-1.2 顶层 + R-1.3.1 等子节点，PARENT:R-1.2/R-1.3 二级树"
+      },
+      "S2": {
+        "score": 2,
+        "reason": "候选覆盖 3090/4090/A6000/A100/H100/M2Max/M2U/M3U 八类；SHARE 主链闭环"
+      },
+      "S3": {
+        "score": 1,
+        "reason": "COUPLE 声明存在；无逐层不重叠自检小节"
+      },
+      "S4": {
+        "score": 2,
+        "reason": "COST 因子带 [E] 区间（折旧 ±20%、能耗 ±10%、残值 ±30%）；KV Cache 计算 TEST：查 HuggingFace 配置 ×2×layers×kv_heads×head_dim×bytes"
+      },
+      "S5": {
+        "score": 2,
+        "reason": "BOTTLENECK=R-1.3.1 显存限并发，SHARE 0.5×BOUND 2.0=1.0；OPEN=CON-2 量化精度vs通过率未量化（假设对所有硬件一致不影响相对排序——该豁免论证本身是判断）"
+      },
+      "C1": {
+        "score": 2,
+        "reason": "工作负载特征量化节点独立建模 in/out/cache 比例与 KV 大小"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "单硬件吞吐量建模节点到位，但 prefill/decode 逐卡严格对比缺失"
+      },
+      "C3": {
+        "score": 2,
+        "reason": "购置/折旧(3年直线至残值±20%)、能耗(满载×24/7×$0.10/kWh ±10%)、残值(±30%) 三因子带误差区间；运维未单列（隐含在残值抵消逻辑里）——略逊于 run1/run2 的四因子"
+      },
+      "C4": {
+        "score": 1,
+        "reason": "残值 ±30% 区间 + 推荐 3090 时明确说『二手或库存』（残值变现路径具体化）"
+      },
+      "C5": {
+        "score": 2,
+        "reason": "CON-1 显存vs并发 resolved；CON-2 量化精度vs通过率 unresolved 且给了豁免论证（对所有硬件一致→不影响相对排序）——带状态的矛盾挖掘"
+      },
+      "total_structure": 9,
+      "total_content": 8,
+      "total": 17
+    }
+  },
+  "mean": 16.33,
+  "sigma": 0.47,
+  "c3_mean": 2.0,
+  "c4_mean": 1.0,
+  "notes": "3/3 run 均触发新契约：COST 字段出现 + 对比表残值列全填带区间。C3 从 R0 基线 1.0 → 2.0，C4 从 0.0 → 1.0，修复生效。但总分 16.33 < R0 基线 17.67：代价在 C5（run2 仅 1 个矛盾）和 S1（run1 平铺）。结论：成本分解契约有效，但与矛盾挖掘深度存在注意力竞争——模型把 token 预算花在 COST 表格上，矛盾节变薄。下一步候选：R0.2 在第 2 节加『至少 2 个 CON-N，缺项不得分』对称契约。"
+}
