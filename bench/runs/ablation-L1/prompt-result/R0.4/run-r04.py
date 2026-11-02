@@ -12,7 +12,7 @@ PROMPT = open(os.path.join(HERE, "..", "..", "..", "..", "prompts", "variants", 
 API = "http://localhost:8787/v1/chat/completions"
 MODEL = "qwen3.8-27b"
 
-def call(prompt: str, max_tokens: int = 16000, temperature: float = 0.7) -> str:
+def call(prompt: str, max_tokens: int = 32000, temperature: float = 0.7) -> str:
     body = json.dumps({
         "model": MODEL,
         "messages": [{"role": "user", "content": prompt}],
