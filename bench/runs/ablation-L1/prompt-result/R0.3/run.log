@@ -1,12 +1,6 @@
 === run1 开始 ===
-run1: 调用中...
-  [52s] 25517 chars
-run1: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.3/run1.md
+run1: 已存在，跳过
 === run2 开始 ===
-run2: 调用中...
-  [56s] 30859 chars
-run2: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.3/run2.md
+run2: 已存在，跳过
 === run3 开始 ===
-run3: 调用中...
-  [279s] 31873 chars
-run3: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.3/run3.md
+run3: 已存在，跳过
