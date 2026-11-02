@@ -1,8 +1,8 @@
 {
   "project": "research-prompt",
-  "last_updated": "2026-10-23T20:18:00+08:00",
-  "last_action": "R0 × 3 run 完成（18.00/σ0.00/C5=2.00）；qwen3.8-bare × 3 run 完成（14.00/σ0.00/C5=2.00）；评分完成；benchmark-v2.md 更新（R0 vs qwen3.8-bare Δ=+4.00 >> 2σ=0 显著）；goal 验收标准全部达标",
-  "phase": "P4-quantify-improvement",
+  "last_updated": "2026-11-03T02:05:00+08:00",
+  "last_action": "r257: R0.4 score-v2.py 机械评分器落盘；run1 FAIL（草稿区截断 0/5 节）；run2 S3=2（SELF-CHECK 新契约生效）/C2=1（缺 Prefill(s)/Decode(s) 表列）；README 中期发现已记录。等 run3 落盘 → lead 复核 8 维 → mean/σ → 五版对比。",
+  "phase": "R0.4 短板补强验证中（run1/run2 落盘，run3 进行中）",
   "todo": {
     "T-P0.1": "completed - research-prompt 项目建档（README/INDEX/raw/research-prompt-plain.md）",
     "T-P0.2": "completed - 创建 bench/prompts/variants/R0/prompt.txt（21 零件契约版）",
