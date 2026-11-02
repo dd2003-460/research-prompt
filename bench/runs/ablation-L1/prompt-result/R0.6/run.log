@@ -10,3 +10,5 @@ run2: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/a
 run3: 调用中...
   [130s] 28560 chars
 run3: 落盘 /Users/a1-6/Desktop/workspace/projects/research-prompt/bench/runs/ablation-L1/prompt-result/R0.6/run3.md
+run2: 已存在，跳过
+run3: 已存在，跳过
