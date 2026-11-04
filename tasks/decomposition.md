@@ -53,10 +53,10 @@
 | T-P0.3 | 写 INDEX.md | ✅ | T-P0.1 |
 | T-P0.4 | 写研究 prompt 原型 | ✅ | T-P0.1 |
 | T-P1.1 | 研究 prompt 完整契约版 | ✅ | T-P0.4 |
-| T-P2.1 | 研究 prompt × 3 run 实跑 | ⏳ | T-P1.1 |
+| T-P2.1 | 研究 prompt × 3 run 实跑（7 变体） | ✅ 2026-11-05 | T-P1.1 |
 | T-P3.1 | 创建 20 分制 rubric | ✅ | T-P2.1 |
-| T-P3.2 | 评分 3 run | ⏳ | T-P3.1 |
-| T-P4.1 | 对标 decomp（C0/C9-plain） | ⏳ | T-P3.2 |
+| T-P3.2 | 评分 3 run（7 变体 + bare + decomp ref） | ✅ 2026-11-05 | T-P3.1 |
+| T-P4.1 | 对标 decomp（C0/C9-plain） | ✅ 2026-11-05 | T-P3.2 |
 | T-P4.2 | 对标开源最强模型 | ⏳ | T-P3.2 |
 | T-P5.1 | 汇总对标表 | ⏳ | T-P4.1, T-P4.2 |
 | T-G1.1 | 创建 GitHub 仓库 | ✅ | T-P0.1 |
