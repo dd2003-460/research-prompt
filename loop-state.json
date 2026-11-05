@@ -1,8 +1,8 @@
 {
   "project": "research-prompt",
-  "last_updated": "2026-11-06T05:45:00+08:00",
-  "last_action": "R0.7 补跑到 n=9：stall=2/9(22%) 与 R0.3 相同，mean=13.29 vs 14.00 (Δ=-0.71, within noise)。之前\"R0.7 明确更差\"是 n=3 vs n=7 不对称产物。两变体统计上不可区分，R0.3 定版理由改为简洁性(Occam)而非统计显著性。C4 轻微劣势(1.29 vs 1.57)证据不足。项目可收口。",
-  "phase": "消融实验完结（八版, n=9 对称样本）：R0.3/R0.7 统计不可区分，R0.3 定版(简洁性)，prompt 层无已证实改进路径",
+  "last_updated": "2026-11-06T05:50:00+08:00",
+  "last_action": "research-prompt 项目正式收口。最终结论：R0.3 定版（简洁性原则），R0.7 统计不可区分(Δ=-0.71 within noise)，stall rate 两变体相同(22%)，prompt 层无已证实改进路径。所有文档修正完毕(SUMMARY/UNIFIED-COMPARISON/N9-FINAL)。唯一突破方向=换更强模型。",
+  "phase": "CLOSED — 八版消融完结，R0.3 定版，无后续自主可执行项",
   "todo": {
     "T-P0.1": "completed - research-prompt 项目建档（README/INDEX/raw/research-prompt-plain.md）",
     "T-P0.2": "completed - 创建 bench/prompts/variants/R0/prompt.txt（21 零件契约版）",
@@ -20,8 +20,8 @@
     "round5_v3_q4": "已完成（2026-10-23 15:07，V3×Q4 交叉验证，90 分）"
   },
   "next_actions": [
-    "换 70B+/API 级执行模型验证天花板（唯一能突破当前分布的方向）",
-    "如果要确认 C4 效应需 n≥20/变体（低优先，实操不影响定版决策）"
+    "[BLOCKED] 换 70B+/API 级执行模型验证天花板（需成璐提供）",
+    "[BLOCKED] C4 效应确认需 n≥20（低优先，不影响定版）"
   ],
   "change_log": [
     "2026-10-23T13:22:00 P0 建档完成",
