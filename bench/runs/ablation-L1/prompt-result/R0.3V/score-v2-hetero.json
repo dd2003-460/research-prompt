@@ -1,0 +1,41 @@
+{
+  "judge": "LMArena agent (hetero)",
+  "rubric": "SCORING-RUBRIC-v2.md (20-point, embedded version)",
+  "source_session": "01a1acde-7ca1-715c-a996-f1289d23b2ae",
+  "extracted_at": "2026-11-06T15:30+08:00",
+  "note": "Data extracted from arena conversation due to GitHub App token 403 on push. Full per-dimension JSON in arena local commit.",
+  "summary": {
+    "mean_total": 13.33,
+    "sigma": 3.51,
+    "ddof": 1,
+    "delta_vs_R0.3_baseline": -4.67
+  },
+  "runs": {
+    "run1": {
+      "total": null,
+      "note": "5 candidates with full triple, incomplete canonical set. S1=1 (node fields lost in Pass-2)."
+    },
+    "run2": {
+      "total": null,
+      "note": "Blackbox + intervals + one-day test. [E] confidence labels. C3=1 (no explicit KIND)."
+    },
+    "run3": {
+      "total": 17,
+      "structure": 8,
+      "content": 9,
+      "note": "RES/SHARE fields present. Orthogonality violation: R-1.2.1/R-1.2.2 both claim RES 人的时间."
+    }
+  },
+  "key_findings": [
+    "Verification pass unstable: more Pass-2 deviation → lower score (run1 worst)",
+    "Internal contradictions introduced by verification: run2 (A100 cheapest vs L40S recommendation), run3 (BOTTLENECK=prefill contradicts per-card table)",
+    "Hetero judge identifies orthogonality violations lead judge missed"
+  ],
+  "comparison_with_lead_judge": {
+    "lead_model": "qwen3.8-27b",
+    "lead_mean": 17.67,
+    "lead_sigma": 1.25,
+    "lead_delta": -0.33,
+    "agreement": "Direction consistent (both below baseline 18), magnitude differs 14x. Hetero much stricter on content depth and orthogonality."
+  }
+}
