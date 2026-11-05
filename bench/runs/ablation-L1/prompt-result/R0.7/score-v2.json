@@ -1,0 +1,210 @@
+{
+  "rubric": "SCORING-RUBRIC-v2.md (20分制) — R0.7 机械预检版",
+  "scorer": "score-v2.py 机械检查 + lead-agent (qwen3.8-27b) 复核",
+  "runs": {
+    "run1": {
+      "chars": 41913,
+      "five_sections": 5,
+      "section_detail": {
+        "## 0. 研究问题定义": true,
+        "## 1. 研究路径": true,
+        "## 2. 矛盾与张力": true,
+        "## 3. 计算与验证": true,
+        "## 4. 结论与置信度": true
+      },
+      "node_blocks": 9,
+      "field_coverage": {
+        "PARENT": 9,
+        "NOW": 9,
+        "GOAL": 9,
+        "GAP": 9,
+        "IN": 9,
+        "OUT": 10,
+        "KIND": 9,
+        "RES": 9,
+        "SHARE": 9,
+        "BOUND": 9,
+        "TEST": 9
+      },
+      "selfcheck_lines": 0,
+      "cost_factors": [
+        "折旧",
+        "运维",
+        "残值"
+      ],
+      "placeholders": 0,
+      "S3": {
+        "score": 0,
+        "reason": "无 COUPLE/重叠声明"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "部分达标(P=True,D=True,TPS=True,$=True,数值=8,漂移=False)",
+        "signals": {
+          "prefill_col": true,
+          "decode_col": true,
+          "tps_col": true,
+          "cost_col": true,
+          "time_nums": 8,
+          "drift": false,
+          "cards": [
+            "4090",
+            "A100",
+            "H100",
+            "M2 Ultra",
+            "M3 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    },
+    "run2": {
+      "chars": 31133,
+      "five_sections": 5,
+      "section_detail": {
+        "## 0. 研究问题定义": true,
+        "## 1. 研究路径": true,
+        "## 2. 矛盾与张力": true,
+        "## 3. 计算与验证": true,
+        "## 4. 结论与置信度": true
+      },
+      "node_blocks": 5,
+      "field_coverage": {
+        "PARENT": 5,
+        "NOW": 5,
+        "GOAL": 5,
+        "GAP": 5,
+        "IN": 5,
+        "OUT": 6,
+        "KIND": 5,
+        "RES": 5,
+        "SHARE": 5,
+        "BOUND": 5,
+        "TEST": 5
+      },
+      "selfcheck_lines": 0,
+      "cost_factors": [
+        "折旧",
+        "能耗",
+        "运维",
+        "残值"
+      ],
+      "placeholders": 0,
+      "S3": {
+        "score": 0,
+        "reason": "无 COUPLE/重叠声明"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "有逐卡数值但缺表列(卡=['4090', 'A6000', 'H100', 'L40S', 'M2 Ultra', 'M3 Ultra', 'MI300X'])",
+        "signals": {
+          "prefill_col": false,
+          "decode_col": false,
+          "tps_col": true,
+          "cost_col": true,
+          "time_nums": 25,
+          "drift": false,
+          "cards": [
+            "4090",
+            "A6000",
+            "H100",
+            "L40S",
+            "M2 Ultra",
+            "M3 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    },
+    "run3": {
+      "chars": 20040,
+      "five_sections": 5,
+      "section_detail": {
+        "## 0. 研究问题定义": true,
+        "## 1. 研究路径": true,
+        "## 2. 矛盾与张力": true,
+        "## 3. 计算与验证": true,
+        "## 4. 结论与置信度": true
+      },
+      "node_blocks": 7,
+      "field_coverage": {
+        "PARENT": 7,
+        "NOW": 7,
+        "GOAL": 7,
+        "GAP": 7,
+        "IN": 7,
+        "OUT": 8,
+        "KIND": 7,
+        "RES": 7,
+        "SHARE": 7,
+        "BOUND": 7,
+        "TEST": 7
+      },
+      "selfcheck_lines": 0,
+      "cost_factors": [
+        "折旧",
+        "能耗",
+        "运维",
+        "残值"
+      ],
+      "placeholders": 0,
+      "S3": {
+        "score": 0,
+        "reason": "无 COUPLE/重叠声明"
+      },
+      "C2": {
+        "score": 1,
+        "reason": "部分达标(P=True,D=True,TPS=True,$=False,数值=14,漂移=False)",
+        "signals": {
+          "prefill_col": true,
+          "decode_col": true,
+          "tps_col": true,
+          "cost_col": false,
+          "time_nums": 14,
+          "drift": false,
+          "cards": [
+            "4090",
+            "A100",
+            "H100",
+            "L40S",
+            "M2 Ultra",
+            "MI300X"
+          ]
+        }
+      },
+      "lead_review_needed": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    }
+  },
+  "mean": null,
+  "sigma": null,
+  "notes": "R0.7 = R0.3 + C2四列强化(+107B)。无SELF-CHECK，无附录。"
+}
