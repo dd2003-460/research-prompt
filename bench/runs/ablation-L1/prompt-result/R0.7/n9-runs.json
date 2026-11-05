@@ -1,0 +1,44 @@
+[
+  {
+    "run": 4,
+    "chars": 23643,
+    "time_s": 48.0,
+    "five": 5,
+    "nodes": 4
+  },
+  {
+    "run": 5,
+    "chars": 31104,
+    "time_s": 55.2,
+    "five": 5,
+    "nodes": 4
+  },
+  {
+    "run": 6,
+    "chars": 17953,
+    "time_s": 41.0,
+    "five": 5,
+    "nodes": 6
+  },
+  {
+    "run": 7,
+    "chars": 22909,
+    "time_s": 39.3,
+    "five": 0,
+    "nodes": 0
+  },
+  {
+    "run": 8,
+    "chars": 25581,
+    "time_s": 46.2,
+    "five": 5,
+    "nodes": 4
+  },
+  {
+    "run": 9,
+    "chars": 19042,
+    "time_s": 34.6,
+    "five": 0,
+    "nodes": 0
+  }
+]
