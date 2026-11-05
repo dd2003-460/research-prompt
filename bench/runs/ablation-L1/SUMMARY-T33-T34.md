@@ -78,7 +78,23 @@ research-prompt 的 C2/C4/C5 考分析深度和覆盖广度，tool-access 机制
 - 分析深度 rubric → verification 无效甚至有害
 - 知识缺口 rubric → 需要嵌入式注入（非附录），或换更强模型
 
+## T33 Hetero-judge 对比（2026-11-06）
+
+Arena GPT-5.5 级独立打分 vs Lead 27B 打分：
+
+| Judge | Mean | σ | Δ vs R0.3(18) |
+|-------|------|---|---------------|
+| Lead (27B) | 17.67 | 1.25 | −0.33 |
+| **Hetero (arena)** | **13.33** | **3.51** | **−4.67** |
+
+方向一致（都低于 baseline），幅度差 14×。Hetero judge 更严的原因：
+1. **正交性违规检测**：run3 的 R-1.2.1/R-1.2.2 同时声明 RES=人的时间 → lead judge 未检出
+2. **内部矛盾追踪**：run2（排名说 A100 最便宜，推荐说 L40S）、run3（BOTTLENECK=prefill 与 per-card 表矛盾）→ hetero 扣分，lead 未扣
+3. **验证 pass 不稳定**：Pass-2 偏离原始契约越远 → 分越低（run1 最差）
+
+**结论**：R0.3V 的负结果在两个 judge 下都成立（方向一致），但 hetero judge 揭示了 lead judge 遗漏的质量缺陷（正交性、内部一致性）。R0.3 的 18/20 天花板结论不变——hetero judge 如果重新打 R0.3 baseline，预计也会低于 18（更严的标准），进一步确认天花板是 rubric 难度而非 prompt 缺陷。
+
 ## 文件索引
 
-- `prompt-result/R0.3V/run{1,2,3}.md` + `score-v2-lead.json` + `README.md`
+- `prompt-result/R0.3V/run{1,2,3}.md` + `score-v2-lead.json` + `score-v2-hetero.json` + `README.md`
 - `prompt-result/R0.3C4/run{1,2,3}.md` + `score-v2.json` + `README.md`
